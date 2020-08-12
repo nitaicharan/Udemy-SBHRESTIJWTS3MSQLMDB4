@@ -6,7 +6,7 @@
 ![Java][java-shield]
 ![Spring][spring-shield]
 
-<p align="center">:bangbang: Documentation available to access at: https://nitaicharan.github.io/Udemy-SBHRESTIJWTS3MSQLMDB4 :bangbang:</p>
+<p align="center">:bangbang: Project available to access at: https://nitaicharan.github.io/Udemy-SBHRESTIJWTS3MSQLMDB4 :bangbang:</p>
 
 <!--[![](Udemy-SBHRESTIJWTS3MSQLMDB4.png)](https://nitaicharan.github.io/Udemy-SBHRESTIJWTS3MSQLMDB4/)-->
 <a href="https://nitaicharan.github.io/Udemy-SBHRESTIJWTS3MSQLMDB4">
@@ -41,22 +41,14 @@ This certificate above verifies that [Nitai Charan][udemy-url] successfully comp
 
 ## Development GitHub Pages
 
-<!-- http://localhost:<port>/swagger-ui.html -->
-
-<!-- pretty-swag -i doc/api-docs.json -o doc/index.html -->
-<!-- swagger-codegen-cli generate -i http://localhost:<port>/v3/api-docs -o doc/ -l html2 -->
-<!-- bootprint openapi http://localhost:8080/v3/api-docs target/ -->
-
 ```
-Sava json http://localhost:<port>/v3/api-docs --> /doc
-
-spectacle doc/api-docs.json  -t doc/
+ionic build --prod --base-href=/Udemy-SBHRESTIJWTS3MSQLMDB4/
 
 git add -A
 git commit -m <titule> <message>
 git push origin <branch>
-git subtree push --prefix doc/ origin gh-pages
-git push origin `git subtree split --prefix doc master`:gh-pages --force
+git subtree push --prefix www/ origin gh-pages
+git push origin `git subtree split --prefix www master`:gh-pages --force
 ```
 
 <!-- MARKDOWN LINKS & IMAGES -->

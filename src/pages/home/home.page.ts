@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
-  public folder: string;
+export class HomePage {
+  constructor(public router: Router) { }
 
-  constructor(private activatedRoute: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+  login() {
+    this.router.navigateByUrl('categorias');
   }
-
 }

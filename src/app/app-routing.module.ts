@@ -3,12 +3,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'inbox',
-    pathMatch: 'full'
+    path: 'categorias',
+    loadChildren: () => import('../pages/categorias/categorias.module').then(m => m.CategoriasPageModule)
   },
   {
-    path: ':id',
+    path: '',
     loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule)
   },
 ];

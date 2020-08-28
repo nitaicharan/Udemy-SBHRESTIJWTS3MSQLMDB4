@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { CredenciaisDTO } from './../../models/credenciais.dto';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +11,18 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage {
 
+  form: FormGroup;
+
   constructor(
+    public router: Router,
+    public formBuilder: FormBuilder,
     public menuController: MenuController,
-    public router: Router
-  ) { }
+  ) {
+    this.form = formBuilder.group({
+      email: [null],
+      senha: [null],
+    });
+  }
 
   ionViewWillEnter() {
     this.menuController.enable(false);
@@ -22,7 +32,12 @@ export class HomePage {
     this.menuController.enable(true);
   }
 
+  get credenciais(): CredenciaisDTO {
+    return this.form.value;
+  }
+
   login() {
+    console.log(this.credenciais);
     this.router.navigateByUrl('categorias');
   }
 }

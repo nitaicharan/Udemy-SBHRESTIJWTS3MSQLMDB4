@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { CategoriaDTO } from 'src/models/categoria.dto';
 import { CategoriaService } from './../../services/domain/categoria.service';
 
 @Component({
@@ -7,8 +9,17 @@ import { CategoriaService } from './../../services/domain/categoria.service';
   styleUrls: ['./categorias.page.scss'],
 })
 export class CategoriasPage {
+  bucketUrl: string = environment.bucketBaseUrl;
+  items: CategoriaDTO[];
 
-  constructor(public categoriaService: CategoriaService) {
-    categoriaService.findAll().subscribe(console.log, console.log);
+  constructor(
+    public categoriaService: CategoriaService) {
+    this.categoriaService.findAll()
+      .subscribe(response => {
+        this.items = response;
+      },
+        error => {
+          console.log(error);
+        });
   }
 }

@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { HttpErrorInterceptor } from 'src/interceptors/error-interceptor';
+import { AuthService } from 'src/services/auth.service';
 import { CategoriaService } from './../services/domain/categoria.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     StatusBar,
+    AuthService,
     SplashScreen,
     CategoriaService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

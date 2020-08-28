@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { tap } from 'rxjs/operators';
 import { CredenciaisDTO } from './../../models/credenciais.dto';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +17,7 @@ export class HomePage {
 
   constructor(
     public router: Router,
+    public authService: AuthService,
     public formBuilder: FormBuilder,
     public menuController: MenuController,
   ) {
@@ -38,6 +41,11 @@ export class HomePage {
 
   login() {
     console.log(this.credenciais);
-    this.router.navigateByUrl('categorias');
+    this.authService.authenticate(this.credenciais).pipe(
+      tap(response => {
+        console.log(response.headers.get('Authorization'));
+        this.router.navigateByUrl('categorias');
+      })
+    ).subscribe();
   }
 }

@@ -43,7 +43,7 @@ export class HomePage {
     console.log(this.credenciais);
     this.authService.authenticate(this.credenciais).pipe(
       tap(response => {
-        console.log(response.headers.get('Authorization'));
+        this.authService.successfulLogin(response.headers.get('Authorization'));
         this.router.navigateByUrl('categorias');
       })
     ).subscribe();

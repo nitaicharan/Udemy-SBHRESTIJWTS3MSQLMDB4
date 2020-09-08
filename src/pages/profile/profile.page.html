@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-avatar>
+    <img [src]="cliente?.imageUrl || '/assets/imgs/avatar-blank.png'" alt="profile">
+  </ion-avatar>
+  <h2 text-center>{{cliente?.nome}}</h2>
+  <p text-center>{{cliente?.email}}</p>
+</ion-content>

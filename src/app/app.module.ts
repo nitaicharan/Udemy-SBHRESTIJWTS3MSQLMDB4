@@ -1,3 +1,4 @@
+import { ClienteService } from './../services/domain/cliente.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,6 +27,7 @@ import { AppComponent } from './app.component';
     StatusBar,
     AuthService,
     SplashScreen,
+    ClienteService,
     StorageService,
     CategoriaService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

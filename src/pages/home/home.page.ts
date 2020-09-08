@@ -40,7 +40,6 @@ export class HomePage {
   }
 
   login() {
-    console.log(this.credenciais);
     this.authService.authenticate(this.credenciais).pipe(
       tap(response => {
         this.authService.successfulLogin(response.headers.get('Authorization'));

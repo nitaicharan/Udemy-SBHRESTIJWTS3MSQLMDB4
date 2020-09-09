@@ -15,9 +15,7 @@ export class ClienteService {
 
     findByEmail(value: string) {
         const params = new HttpParams({ fromObject: { value } });
-        const token = this.storageService.getLocalUser().token;
-        const authorization = `Bearer `.concat(token);
-        return this.http.get<ClienteDTO>(`${environment.BASE_URL}/clientes/email`, { params, headers: { authorization } });
+        return this.http.get<ClienteDTO>(`${environment.BASE_URL}/clientes/email`, { params });
     }
 
     getImageFromBucket(id: string) {

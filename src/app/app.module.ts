@@ -1,4 +1,3 @@
-import { ClienteService } from './../services/domain/cliente.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +8,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { HttpErrorInterceptor } from 'src/interceptors/error-interceptor';
 import { AuthService } from 'src/services/auth.service';
 import { StorageService } from 'src/services/storage.service';
+import { AuthInterceptor } from './../interceptors/auth-interceptor';
 import { CategoriaService } from './../services/domain/categoria.service';
+import { ClienteService } from './../services/domain/cliente.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -30,6 +31,7 @@ import { AppComponent } from './app.component';
     ClienteService,
     StorageService,
     CategoriaService,
+    AuthInterceptor,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],

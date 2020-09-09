@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { take, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { catchError, take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ClienteDTO } from 'src/models/cliente.dto';
 import { ClienteService } from 'src/services/domain/cliente.service';
@@ -17,6 +19,7 @@ export class ProfilePage {
   constructor(
     private clienteService: ClienteService,
     private storageService: StorageService,
+    private router: Router,
   ) {
     const localUser = this.storageService.getLocalUser();
     if (localUser && localUser.email) {
@@ -24,7 +27,12 @@ export class ProfilePage {
         tap(response => this.cliente = response),
         tap(() => this.cliente.imageUrl = `${environment.bucketBaseUrl}/cp${this.cliente.id}.jpg`),
         take(1),
+        catchError(error => {
+          if (error.status) { this.router.navigateByUrl('/'); }
+          return new Observable();
+        })
       ).subscribe();
     }
+    else { this.router.navigateByUrl('/'); }
   }
 }

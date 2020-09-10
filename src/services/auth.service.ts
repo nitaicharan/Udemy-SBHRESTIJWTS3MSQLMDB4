@@ -21,6 +21,11 @@ export class AuthService {
         return this.http.post(url, creds, { observe: 'response', responseType: 'text' });
     }
 
+    refreshToken() {
+        const url = `${environment.BASE_URL}/auth/refresh_token`;
+        return this.http.post(url, {}, { observe: 'response', responseType: 'text' });
+    }
+
     successfulLogin(authorizationValue: string) {
         const tok = authorizationValue.substring('Berrer '.length);
 

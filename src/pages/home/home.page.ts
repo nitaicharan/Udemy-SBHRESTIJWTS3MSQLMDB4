@@ -35,6 +35,16 @@ export class HomePage {
     this.menuController.enable(true);
   }
 
+  ionViewDidEnter() {
+    this.authService.refreshToken().pipe(
+      tap(() => {
+        this.authService.refreshToken();
+        this.router.navigateByUrl('categorias');
+      })
+    ).subscribe();
+  }
+
+
   get credenciais(): CredenciaisDTO {
     return this.form.value;
   }

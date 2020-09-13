@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
       icon: 'pricetags'
     },
     {
-      title: 'Logout',
-      url: '/logout',
+      title: 'Log Out',
+      url: '/log-out',
       icon: 'log-out'
     },
   ];

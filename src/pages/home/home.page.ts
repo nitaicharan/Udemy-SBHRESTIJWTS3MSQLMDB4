@@ -57,4 +57,8 @@ export class HomePage {
       })
     ).subscribe();
   }
+
+  signup(){
+    this.router.navigateByUrl('/sign-up');
+  }
 }

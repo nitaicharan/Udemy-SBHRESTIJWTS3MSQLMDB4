@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
 
 @Component({
-  selector: 'app-logout',
-  templateUrl: './logout.page.html',
-  styleUrls: ['./logout.page.scss'],
+  selector: 'app-log-out',
+  templateUrl: './log-out.page.html',
+  styleUrls: ['./log-out.page.scss'],
 })
-export class LogoutPage {
+export class LogOutPage {
   constructor(
     private router: Router,
     private service: AuthService,

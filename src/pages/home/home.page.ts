@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { CredenciaisDTO } from './../../models/credenciais.dto';
 import { AuthService } from './../../services/auth.service';
 
@@ -17,7 +17,7 @@ export class HomePage {
 
   constructor(
     public router: Router,
-    public authService: AuthService,
+    public service: AuthService,
     public formBuilder: FormBuilder,
     public menuController: MenuController,
   ) {
@@ -36,23 +36,23 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    this.authService.refreshToken().pipe(
-      tap(() => {
-        this.authService.refreshToken();
+    this.service.refreshToken().pipe(
+      tap(response => {
+        this.service.successfulLogin(response.headers.get('Authorization'));
         this.router.navigateByUrl('categorias');
-      })
+      }),
+      take(1),
     ).subscribe();
   }
-
 
   get credenciais(): CredenciaisDTO {
     return this.form.value;
   }
 
   login() {
-    this.authService.authenticate(this.credenciais).pipe(
+    this.service.authenticate(this.credenciais).pipe(
       tap(response => {
-        this.authService.successfulLogin(response.headers.get('Authorization'));
+        this.service.successfulLogin(response.headers.get('Authorization'));
         this.router.navigateByUrl('categorias');
       })
     ).subscribe();

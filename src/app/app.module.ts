@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AuthService } from 'src/services/auth.service';
 import { StorageService } from 'src/services/storage.service';
-import { AuthInterceptor } from './../interceptors/auth-interceptor';
+import { AuthInterceptor, AuthInterceptorProvider } from './../interceptors/auth-interceptor';
 import { ErrorInterceptorProvider } from './../interceptors/error-interceptor';
 import { CategoriaService } from './../services/domain/categoria.service';
 import { ClienteService } from './../services/domain/cliente.service';
@@ -32,6 +32,7 @@ import { AppComponent } from './app.component';
     StorageService,
     CategoriaService,
     AuthInterceptor,
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],

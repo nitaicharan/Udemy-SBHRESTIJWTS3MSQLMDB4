@@ -22,8 +22,12 @@ export class AppComponent implements OnInit {
       url: '/categorias',
       icon: 'pricetags'
     },
+    {
+      title: 'Logout',
+      url: '/logout',
+      icon: 'log-out'
+    },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,

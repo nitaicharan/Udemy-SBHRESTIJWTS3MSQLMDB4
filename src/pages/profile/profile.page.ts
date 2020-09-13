@@ -26,11 +26,11 @@ export class ProfilePage {
       this.clienteService.findByEmail(localUser.email).pipe(
         tap(response => this.cliente = response),
         tap(() => this.cliente.imageUrl = `${environment.bucketBaseUrl}/cp${this.cliente.id}.jpg`),
-        take(1),
         catchError(error => {
           if (error.status) { this.router.navigateByUrl('/'); }
           return new Observable();
-        })
+        }),
+        take(1),
       ).subscribe();
     }
     else { this.router.navigateByUrl('/'); }

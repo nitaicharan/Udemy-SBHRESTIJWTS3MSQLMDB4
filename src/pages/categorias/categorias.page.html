@@ -14,7 +14,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item button *ngFor="let item of items" (click)="showProdutos()">
+    <ion-item button *ngFor="let item of items$ | async" routerLink="/produtos/{{item.id}}">
       <ion-thumbnail slot="start">
         <img src="{{bucketUrl}}/cat{{item.id}}.jpg">
       </ion-thumbnail>

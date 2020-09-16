@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ProdutoDTO } from 'src/models/produto.dto';
+import { ProdutoService } from 'src/services/domain/produto.service';
 
 @Component({
   selector: 'app-produtos',
@@ -8,20 +11,16 @@ import { ProdutoDTO } from 'src/models/produto.dto';
   styleUrls: ['./produtos.page.scss'],
 })
 export class ProdutosPage {
-  items: ProdutoDTO[];
+  items$: Observable<ProdutoDTO[]>;
 
-  constructor(private router: Router) {
-    this.items = [
-      {
-        id: '1',
-        nome: 'Mouse',
-        preco: 80.99
-      },
-      {
-        id: '2',
-        nome: 'Teclado',
-        preco: 100.00
-      },
-    ];
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private produtoService: ProdutoService,
+  ) {
+    const categoriaId = this.activatedRoute.snapshot.params.categoriaId;
+
+    this.items$ = this.produtoService.findByCategoria(categoriaId).pipe(
+      map(response => response['content'])
+    );
   }
 }

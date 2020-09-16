@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { CategoriaDTO } from 'src/models/categoria.dto';
 import { CategoriaService } from './../../services/domain/categoria.service';
@@ -13,11 +14,17 @@ export class CategoriasPage {
   items: CategoriaDTO[];
 
   constructor(
-    public categoriaService: CategoriaService) {
+    private router: Router,
+    private categoriaService: CategoriaService,
+  ) {
     this.categoriaService.findAll()
       .subscribe(response => {
         this.items = response;
       },
-        error => {});
+        error => { });
+  }
+
+  showProdutos() {
+    this.router.navigateByUrl('/produtos');
   }
 }

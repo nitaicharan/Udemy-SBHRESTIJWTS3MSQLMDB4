@@ -16,11 +16,15 @@ const routes: Routes = [
   },
   {
     path: 'sign-up',
-    loadChildren: () => import('../pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+    loadChildren: () => import('../pages/sign-up/sign-up.module').then(m => m.SignUpPageModule)
   },
   {
     path: 'log-out',
-    loadChildren: () => import('../pages/log-out/log-out.module').then( m => m.LogOutPageModule)
+    loadChildren: () => import('../pages/log-out/log-out.module').then(m => m.LogOutPageModule)
+  },
+  {
+    path: 'produtos',
+    loadChildren: () => import('../pages/produtos/produtos.module').then(m => m.ProdutosPageModule)
   },
 ];
 

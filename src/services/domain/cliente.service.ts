@@ -22,4 +22,8 @@ export class ClienteService {
         const url = `${environment.bucketBaseUrl}/cp${id}.jpg`;
         return this.http.get(url, { responseType: 'blob' });
     }
+
+    insert(obj: ClienteDTO) {
+        return this.http.post(`${environment.BASE_URL}/clientes`, obj, { observe: 'response', responseType: 'text' });
+    }
 }

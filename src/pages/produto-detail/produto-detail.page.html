@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Produto Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card class="md hydrated">
+    <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
+
+    <ion-card-header class="ion-inherit-color md hydrated">
+      <ion-card-title>{{item?.nome}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content> {{item?.preco | currency}} </ion-card-content>
+
+    <ion-button>Adicionar ao carrinho</ion-button>
+  </ion-card>
+</ion-content>

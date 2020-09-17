@@ -1,15 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
-import { ProdutoDTO } from './../../models/produto.dto';
 
 @Injectable()
 export class ProdutoService {
 
-    constructor(public http: HttpClient) {
-    }
+    constructor(public httpClient: HttpClient) { }
 
-    findByCategoria(categoriaId: string) {
-        return this.http.get(`${environment.BASE_URL}/produtos/?categorias=${categoriaId}`);
-    }
+    findByCategoria = (categoriaId: string) => this.httpClient.get(`${environment.API_URL}/produtos/?categorias=${categoriaId}`);
+    getSmallImageFromBucket = (id: string) => this.httpClient.get(`${environment.BUCKET_URL}/prod${id}-small.jpg`, { responseType: 'blob' });
 }

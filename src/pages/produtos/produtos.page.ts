@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ProdutoDTO } from 'src/models/produto.dto';
+import { from, Observable } from 'rxjs';
+import { map, mergeMap, reduce, switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { ProdutoService } from 'src/services/domain/produto.service';
+import { ProdutoDTO } from './../../models/produto.dto';
 
 @Component({
   selector: 'app-produtos',
@@ -20,7 +21,18 @@ export class ProdutosPage {
     const categoriaId = this.activatedRoute.snapshot.params.categoriaId;
 
     this.items$ = this.produtoService.findByCategoria(categoriaId).pipe(
-      map(response => response['content'])
+      switchMap(response => this.loadImageUrls(response['content'])),
+    );
+  }
+
+  loadImageUrls(items: ProdutoDTO[]) {
+    return from(items).pipe(
+      mergeMap(item => {
+        return this.produtoService.getSmallImageFromBucket(item.id).pipe(
+          map<Blob, ProdutoDTO>(() => ({ ...item, imageUrl: `${environment.BUCKET_URL}/prod${item.id}-small.jpg` })),
+        );
+      }),
+      reduce<ProdutoDTO, ProdutoDTO[]>((lista, produto) => [...lista, produto], []),
     );
   }
 }

@@ -8,6 +8,6 @@ export class CategoriaService {
     constructor(public httpClient: HttpClient) { }
 
     findAll() {
-        return this.httpClient.get<CategoriaDTO[]>(`${environment.BASE_URL}/categorias`, { observe: 'response' });
+        return this.httpClient.get<CategoriaDTO[]>(`${environment.API_URL}/categorias`, { observe: 'response' });
     }
 }

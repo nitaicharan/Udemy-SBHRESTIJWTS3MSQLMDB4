@@ -17,12 +17,12 @@ export class AuthService {
     ) { }
 
     authenticate(creds: CredenciaisDTO) {
-        const url = `${environment.BASE_URL}/login`;
+        const url = `${environment.API_URL}/login`;
         return this.http.post(url, creds, { observe: 'response', responseType: 'text' });
     }
 
     refreshToken() {
-        const url = `${environment.BASE_URL}/auth/refresh_token`;
+        const url = `${environment.API_URL}/auth/refresh_token`;
         return this.http.post(url, {}, { observe: 'response', responseType: 'text' });
     }
 

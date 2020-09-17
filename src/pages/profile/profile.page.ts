@@ -25,7 +25,7 @@ export class ProfilePage {
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email).pipe(
         tap(response => this.cliente = response),
-        tap(() => this.cliente.imageUrl = `${environment.bucketBaseUrl}/cp${this.cliente.id}.jpg`),
+        tap(() => this.cliente.imageUrl = `${environment.BUCKET_URL}/cp${this.cliente.id}.jpg`),
         catchError(error => {
           if (error.status) { this.router.navigateByUrl('/'); }
           return new Observable();

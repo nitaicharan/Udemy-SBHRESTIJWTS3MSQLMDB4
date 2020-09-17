@@ -12,7 +12,7 @@ import { CategoriaService } from './../../services/domain/categoria.service';
 })
 export class CategoriasPage {
   items$: Observable<CategoriaDTO[]>;
-  bucketUrl: string = environment.bucketBaseUrl;
+  bucketUrl: string = environment.BUCKET_URL;
 
   constructor(categoriaService: CategoriaService) {
     this.items$ = categoriaService.findAll().pipe(

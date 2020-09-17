@@ -15,15 +15,15 @@ export class ClienteService {
 
     findByEmail(value: string) {
         const params = new HttpParams({ fromObject: { value } });
-        return this.http.get<ClienteDTO>(`${environment.BASE_URL}/clientes/email`, { params });
+        return this.http.get<ClienteDTO>(`${environment.API_URL}/clientes/email`, { params });
     }
 
     getImageFromBucket(id: string) {
-        const url = `${environment.bucketBaseUrl}/cp${id}.jpg`;
+        const url = `${environment.BUCKET_URL}/cp${id}.jpg`;
         return this.http.get(url, { responseType: 'blob' });
     }
 
     insert(obj: ClienteDTO) {
-        return this.http.post(`${environment.BASE_URL}/clientes`, obj, { observe: 'response', responseType: 'text' });
+        return this.http.post(`${environment.API_URL}/clientes`, obj, { observe: 'response', responseType: 'text' });
     }
 }

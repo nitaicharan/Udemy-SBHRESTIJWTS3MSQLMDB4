@@ -24,11 +24,15 @@ const routes: Routes = [
   },
   {
     path: 'produto-detail',
-    loadChildren: () => import('../pages/produto-detail/produto-detail.module').then( m => m.ProdutoDetailPageModule)
+    loadChildren: () => import('../pages/produto-detail/produto-detail.module').then(m => m.ProdutoDetailPageModule)
   },
   {
     path: 'produtos',
     loadChildren: () => import('../pages/produtos/produtos.module').then(m => m.ProdutosPageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('../pages/cart/cart.module').then(m => m.CartPageModule)
   },
 ];
 

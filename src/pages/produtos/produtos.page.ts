@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { from, Observable } from 'rxjs';
-import { map, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
+import { flatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ProdutoService } from 'src/services/domain/produto.service';
 import { ProdutoDTO } from './../../models/produto.dto';

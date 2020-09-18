@@ -23,12 +23,12 @@ const routes: Routes = [
     loadChildren: () => import('../pages/log-out/log-out.module').then(m => m.LogOutPageModule)
   },
   {
-    path: 'produtos',
-    loadChildren: () => import('../pages/produtos/produtos.module').then(m => m.ProdutosPageModule)
-  },
-  {
     path: 'produto-detail',
     loadChildren: () => import('../pages/produto-detail/produto-detail.module').then( m => m.ProdutoDetailPageModule)
+  },
+  {
+    path: 'produtos',
+    loadChildren: () => import('../pages/produtos/produtos.module').then(m => m.ProdutosPageModule)
   },
 ];
 

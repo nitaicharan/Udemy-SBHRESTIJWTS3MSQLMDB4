@@ -3,16 +3,17 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="secondary">
-      <ion-button>
-        <ion-icon slot="icon-only" name="star"></ion-icon>
-      </ion-button>
-    </ion-buttons>
     <ion-title>Categorias</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button routerLink="/cart">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-list>
     <ion-item button *ngFor="let item of items$ | async" routerLink="/produtos/{{item.id}}">
       <ion-thumbnail slot="start">

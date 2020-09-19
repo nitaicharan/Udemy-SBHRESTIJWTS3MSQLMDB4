@@ -4,11 +4,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ng-template>
-
-</ng-template>
-
 <ion-content padding *ngIf="item$ | async as item">
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button routerLink="/cart">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <ion-card class="md hydrated">
     <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">

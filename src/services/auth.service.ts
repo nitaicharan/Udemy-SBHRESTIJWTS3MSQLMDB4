@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalUser } from 'src/models/local-user.model';
 import { CredenciaisDTO } from '../models/credenciais.dto';
 import { environment } from './../environments/environment';
+import { CartService } from './cart.service';
 import { StorageService } from './storage.service';
 
 
@@ -12,8 +13,9 @@ export class AuthService {
     jwtHelper = new JwtHelperService();
 
     constructor(
-        public http: HttpClient,
-        public storage: StorageService
+        private http: HttpClient,
+        private service: StorageService,
+        private cartService: CartService,
     ) { }
 
     authenticate(creds: CredenciaisDTO) {
@@ -33,9 +35,9 @@ export class AuthService {
             token: tok,
             email: this.jwtHelper.decodeToken(tok).sub
         };
-
-        this.storage.setLocalUser(user);
+        this.service.setLocalUser(user);
+        this.cartService.createOrClearCart();
     }
 
-    logout = () => this.storage.setLocalUser(null);
+    logout = () => this.service.setLocalUser(null);
 }

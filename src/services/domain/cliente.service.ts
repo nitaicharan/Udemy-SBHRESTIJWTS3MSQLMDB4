@@ -15,7 +15,7 @@ export class ClienteService {
 
     findByEmail(value: string) {
         const params = new HttpParams({ fromObject: { value } });
-        return this.http.get<ClienteDTO>(`${environment.API_URL}/clientes/email`, { params });
+        return this.http.get(`${environment.API_URL}/clientes/email`, { params });
     }
 
     getImageFromBucket(id: string) {

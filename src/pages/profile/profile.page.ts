@@ -24,7 +24,7 @@ export class ProfilePage {
     const localUser = this.storageService.getLocalUser();
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email).pipe(
-        tap(response => this.cliente = response),
+        tap(response => this.cliente = response as ClienteDTO),
         tap(() => this.cliente.imageUrl = `${environment.BUCKET_URL}/cp${this.cliente.id}.jpg`),
         catchError(error => {
           if (error.status) { this.router.navigateByUrl('/'); }
@@ -33,6 +33,6 @@ export class ProfilePage {
         take(1),
       ).subscribe();
     }
-    else { this.router.navigateByUrl('/'); }
+    else this.router.navigateByUrl('/');
   }
 }

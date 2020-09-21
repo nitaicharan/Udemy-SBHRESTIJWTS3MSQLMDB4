@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item button *ngFor="let item of items$ | async">
+    <ion-item button *ngFor="let item of items$ | async" (click)="nextPage(item)">
       <ion-label>
         <h2>{{item.logradouro}}, {{item.numero}}</h2>
         <h3>{{item.complemento}} {{item.bairro}} CEP {{item.cep}}</h3>

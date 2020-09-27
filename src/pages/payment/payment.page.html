@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>payment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup">
+
+
+    <ion-list>
+      <ion-radio-group value="pagamentoComCartao" formControlName="@type">
+        <ion-list-header>
+          <ion-label>Tipo de pagamento</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Pagamento com cartão</ion-label>
+          <ion-radio slot="start" value="pagamentoComCartao"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Pagamento com boleto</ion-label>
+          <ion-radio slot="start" value="pagamentoComBoleto"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-item *ngIf="formGroup.value['@type'] == 'pagamentoComCartao'">
+      <ion-label>Parcelas no boleto</ion-label>
+      <ion-select formControlName="numeroDeParcelas">
+        <ion-select-option *ngFor="let n of parcelas; first as f" [value]="n">
+          {{n}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button [disabled]="formGroup.invalid" (click)="nextPage()" expand="block">Próximo</ion-button>
+  </form>
+</ion-content>

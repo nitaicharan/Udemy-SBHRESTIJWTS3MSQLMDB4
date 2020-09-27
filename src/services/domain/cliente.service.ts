@@ -18,6 +18,11 @@ export class ClienteService {
         return this.http.get(`${environment.API_URL}/clientes/email`, { params });
     }
 
+    findById(id: string) {
+        return this.http.get<ClienteDTO>(`${environment.API_URL}/clientes/${id}`);
+    }
+
+
     getImageFromBucket(id: string) {
         const url = `${environment.BUCKET_URL}/cp${id}.jpg`;
         return this.http.get(url, { responseType: 'blob' });

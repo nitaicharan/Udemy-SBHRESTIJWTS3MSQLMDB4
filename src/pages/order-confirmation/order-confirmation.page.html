@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confira seu pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header class="ion-inherit-color md hydrated">
+      <ion-card-title> Itens do pedido </ion-card-title>
+    </ion-card-header>
+
+    <ion-item *ngFor="let item of cartItems">
+      <ion-thumbnail slot="start">
+        <img [src]="item.produto.imageUrl || 'assets/imgs/prod.jpg'">
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2>{{item.produto.nome}}</h2>
+        <p class="nolinebreak">{{item.quantidade}}</p>
+        <p item-end>{{item.produto.preco * item.quantidade | currency}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+
+  <ng-container *ngIf="cliente$ | async as cliente">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title> Cliente </ion-card-title>
+      </ion-card-header>
+
+      <ion-item>
+        <h2>{{cliente?.nome}}</h2>
+        <p>{{cliente?.email}}</p>
+      </ion-item>
+    </ion-card>
+
+    <ng-container *ngIf="findEndereco(cliente) as endereco">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title> Endereço de entrega </ion-card-title>
+        </ion-card-header>
+
+        <ion-item>
+          <h2>{{endereco?.logradouro}}, {{endereco?.numero}}</h2>
+          <p>{{endereco?.complemento}} {{endereco?.bairro}} CEP {{endereco?.cep}}</p>
+          <p>{{endereco?.cidade.nome}}, {{endereco?.cidade.estado.nome}}</p>
+        </ion-item>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Pagamento </ion-card-title>
+    </ion-card-header>
+
+    <ng-container *ngIf="pedido.pagamento['@type']=='pagamentoComCartao'">
+      <ion-item>
+        <ion-label> Pagamento com cartão </ion-label>
+        <p>Parcelas: {{pedido.pagamento.numeroDeParcelas}}</p>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="pedido.pagamento['@type']=='pagamentoComBoleto'">
+      <ion-item>
+        <ion-label> Pagamento com boleto </ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-card>
+</ion-content>

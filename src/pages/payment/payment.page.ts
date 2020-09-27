@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { PedidoDTO } from 'src/models/pedido.dto';
 
 @Component({
@@ -27,6 +27,8 @@ export class PaymentPage {
 
   nextPage() {
     this.pedido.pagamento = this.formGroup.value;
-    console.log(this.pedido);
+    const navigationExtras: NavigationExtras = { state: { pedido: this.pedido } };
+
+    this.router.navigate(['/order-confirmation'], navigationExtras);
   }
 }

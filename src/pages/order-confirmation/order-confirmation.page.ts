@@ -18,6 +18,7 @@ export class OrderConfirmationPage {
   pedido: PedidoDTO;
   cartItems: CartItem[];
   cliente$: Observable<ClienteDTO>;
+  codpedido: string;
 
   constructor(
     private router: Router,
@@ -45,12 +46,18 @@ export class OrderConfirmationPage {
 
   checkout() {
     this.pedidoService.insert(this.pedido).pipe(
-      tap(response => this.cartService.createOrClearCart()),
+      tap(() => this.cartService.createOrClearCart()),
+      tap(response => this.codpedido = this.extractId(response.headers.get('location'))),
       catchError(error => {
         if (error.status === 403) {
           return this.router.navigateByUrl('/');
         }
       })
     ).subscribe();
+  }
+
+  private extractId(location: string) {
+    const position = location.lastIndexOf('/');
+    return location.substring(position + 1);
   }
 }

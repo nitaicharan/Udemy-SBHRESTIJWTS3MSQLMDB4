@@ -40,8 +40,8 @@
       </ion-item>
     </ng-template>
 
-    <ion-button expand="block" color="primary" routerLink="/categorias">CONTINUAR COMPRANDO</ion-button>
-    <ion-button expand="block" color="secondary" routerLink="/pick-address">FINALIZAR PEDIDO</ion-button>
+    <ion-button expand="block" color="primary" routerLink="/categorias">Continuar Comprando</ion-button>
+    <ion-button *ngIf="total() > 0" expand="block" color="secondary" routerLink="/pick-address">Finalizar Pedido</ion-button>
   </ion-list>
 
 </ion-content>

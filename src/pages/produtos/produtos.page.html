@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding *ngIf="items$ | async as items">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -16,7 +16,7 @@
   </ion-fab>
 
   <ion-list>
-    <ion-item button *ngFor="let item of items$ | async" routerLink="/produto-detail/{{item.id}}">
+    <ion-item button *ngFor="let item of items" routerLink="/produto-detail/{{item.id}}">
       <ion-thumbnail slot="start">
         <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
       </ion-thumbnail>
@@ -26,4 +26,9 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event, items)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Aguarde...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

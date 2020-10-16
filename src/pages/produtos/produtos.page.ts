@@ -12,6 +12,7 @@ import { ProdutoDTO } from './../../models/produto.dto';
   styleUrls: ['./produtos.page.scss'],
 })
 export class ProdutosPage {
+  page = 0;
   items$: Observable<ProdutoDTO[]>;
 
   constructor(
@@ -21,10 +22,14 @@ export class ProdutosPage {
     this.items$ = this.loadData();
   }
 
-  loadData() {
+  loadData(produtoDtos?: ProdutoDTO[]) {
     const categoriaId = this.activatedRoute.snapshot.params.categoriaId;
-    return this.service.findByCategoria(categoriaId).pipe(
-      switchMap(produtoDtos => this.loadImageUrls(produtoDtos)),
+    return this.service.findByCategoria({ categorias: `${categoriaId}`, page: `${this.page}`, linesPerPage: `${10}` }).pipe(
+      map(p => {
+        if (produtoDtos) return [...p, ...produtoDtos]
+        return p;
+      }),
+      switchMap(p => this.loadImageUrls(p)),
     );
   }
 
@@ -41,6 +46,14 @@ export class ProdutosPage {
 
   doRefresh(event) {
     this.items$ = this.loadData().pipe(
+      tap(() => this.page = 0),
+      tap(() => setTimeout(() => event.target.complete(), 500))
+    );
+  }
+
+  doInfinite(event, items: ProdutoDTO[]) {
+    this.items$ = this.loadData(items).pipe(
+      tap(() => this.page++),
       tap(() => setTimeout(() => event.target.complete(), 500))
     );
   }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { from, Observable } from 'rxjs';
-import { flatMap, map, mergeMap, reduce, switchMap } from 'rxjs/operators';
+import { map, mergeMap, reduce, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ProdutoService } from 'src/services/domain/produto.service';
 import { ProdutoDTO } from './../../models/produto.dto';
@@ -18,9 +18,12 @@ export class ProdutosPage {
     private activatedRoute: ActivatedRoute,
     private service: ProdutoService,
   ) {
-    const categoriaId = this.activatedRoute.snapshot.params.categoriaId;
+    this.items$ = this.loadData();
+  }
 
-    this.items$ = this.service.findByCategoria(categoriaId).pipe(
+  loadData() {
+    const categoriaId = this.activatedRoute.snapshot.params.categoriaId;
+    return this.service.findByCategoria(categoriaId).pipe(
       switchMap(produtoDtos => this.loadImageUrls(produtoDtos)),
     );
   }
@@ -33,6 +36,12 @@ export class ProdutosPage {
         );
       }),
       reduce<ProdutoDTO, ProdutoDTO[]>((lista, produto) => [...lista, produto], []),
+    );
+  }
+
+  doRefresh(event) {
+    this.items$ = this.loadData().pipe(
+      tap(() => setTimeout(() => event.target.complete(), 500))
     );
   }
 }

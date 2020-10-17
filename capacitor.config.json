@@ -1,0 +1,13 @@
+{
+  "appId": "com.nitaicharan.udemysbhrestijwts3msqlmdb4",
+  "appName": "udemysbhrestijwts3msqlmdb4",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

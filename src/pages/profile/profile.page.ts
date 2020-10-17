@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { CameraResultType, CameraSource, Plugins } from '@capacitor/core';
 import { Observable } from 'rxjs';
 import { catchError, take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -14,12 +16,15 @@ import { StorageService } from 'src/services/storage.service';
 })
 export class ProfilePage {
   email: string;
+  cameraOn = false;
   cliente: ClienteDTO;
+  picture: SafeResourceUrl;
 
   constructor(
+    private router: Router,
+    private domSanitizer: DomSanitizer,
     private clienteService: ClienteService,
     private storageService: StorageService,
-    private router: Router,
   ) {
     const localUser = this.storageService.getLocalUser();
     if (localUser && localUser.email) {
@@ -34,5 +39,17 @@ export class ProfilePage {
       ).subscribe();
     }
     else this.router.navigateByUrl('/');
+  }
+
+  async getCameraPicture() {
+    const { Camera } = Plugins;
+    const result = await Camera.getPhoto({
+      quality: 75,
+      allowEditing: true,
+      source: CameraSource.Camera,
+      resultType: CameraResultType.DataUrl,
+    });
+
+    this.picture = this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.dataUrl);
   }
 }

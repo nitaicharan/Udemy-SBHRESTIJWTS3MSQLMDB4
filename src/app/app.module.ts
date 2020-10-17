@@ -23,8 +23,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
     IonicModule.forRoot(),
-    AppRoutingModule
   ],
   providers: [
     StatusBar,

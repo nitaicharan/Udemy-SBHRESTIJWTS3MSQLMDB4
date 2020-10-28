@@ -8,6 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AuthService } from 'src/services/auth.service';
 import { CartService } from 'src/services/cart.service';
 import { ProdutoService } from 'src/services/domain/produto.service';
+import { ImageUtilService } from 'src/services/image-util.service';
 import { StorageService } from 'src/services/storage.service';
 import { AuthInterceptor, AuthInterceptorProvider } from './../interceptors/auth-interceptor';
 import { ErrorInterceptorProvider } from './../interceptors/error-interceptor';
@@ -35,6 +36,7 @@ import { AppComponent } from './app.component';
     ProdutoService,
     ClienteService,
     AuthInterceptor,
+    ImageUtilService,
     CategoriaService,
     AuthInterceptorProvider,
     ErrorInterceptorProvider,

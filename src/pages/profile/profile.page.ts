@@ -26,6 +26,10 @@ export class ProfilePage {
     private clienteService: ClienteService,
     private storageService: StorageService,
   ) {
+    this.loadData();
+  }
+
+  loadData() {
     const localUser = this.storageService.getLocalUser();
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email).pipe(
@@ -51,5 +55,16 @@ export class ProfilePage {
     });
 
     this.picture = this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.dataUrl);
+  }
+
+  sendPicture() {
+    this.clienteService.uploadPicture(this.picture).pipe(
+      tap(() => this.picture = null),
+      tap(() => this.loadData()),
+    ).subscribe();
+  }
+
+  cancel() {
+    this.picture = null;
   }
 }

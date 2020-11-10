@@ -57,6 +57,18 @@ export class ProfilePage {
     this.picture = this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.dataUrl);
   }
 
+  async getGalleryPicture() {
+    const { Camera } = Plugins;
+    const result = await Camera.getPhoto({
+      quality: 75,
+      allowEditing: true,
+      source: CameraSource.Photos,
+      resultType: CameraResultType.DataUrl,
+    });
+
+    this.picture = this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.dataUrl);
+  }
+
   sendPicture() {
     this.clienteService.uploadPicture(this.picture).pipe(
       tap(() => this.picture = null),

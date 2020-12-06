@@ -17,7 +17,7 @@ export class ClienteService {
 
     findByEmail(value: string) {
         const params = new HttpParams({ fromObject: { value } });
-        return this.httpClient.get(`${environment.API_URL}/clientes/email`, { params });
+        return this.httpClient.get<ClienteDTO>(`${environment.API_URL}/clientes/email`, { params });
     }
 
     findById(id: string) {
